@@ -1,0 +1,131 @@
+---
+import {
+    Wifi,
+    Coffee,
+    Armchair,
+    Waves,
+    TreePine,
+    Map,
+    Ship,
+    ArrowUpDown,
+} from "lucide-react";
+
+const services = [
+    {
+        icon: Wifi,
+        title: "Conectividad",
+        description: "Internet WiFi estable (ideal para estudiar o trabajar).",
+    },
+    {
+        icon: Coffee,
+        title: "Alimentación Casera",
+        description: "Desayunos frescos, almuerzos y onces.",
+    },
+    {
+        icon: Armchair,
+        title: "Áreas Comunes",
+        description:
+            "Sala de estar, Piscina (temporada), Balcones con vista al mar, Lavandería.",
+    },
+];
+
+const surroundings = [
+    {
+        text: "Caminatas por el cerro",
+        icon: TreePine,
+        image: "/imagenes/valparaiso cerros.webp",
+    },
+    {
+        text: "Museo La Sebastiana",
+        icon: Map,
+        image: "/imagenes/museo-la-sebastiana.jpg",
+    },
+    {
+        text: "Paseos en Lancha",
+        icon: Ship,
+        image: "/imagenes/paseo-lancha.jpg",
+    },
+    {
+        text: "Ascensores de Valparaíso",
+        icon: ArrowUpDown,
+        image: "/imagenes/ascensores-valparaiso.webp",
+    },
+];
+---
+
+<section class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Servicios -->
+        <div class="mb-24">
+            <h2
+                class="text-4xl md:text-5xl font-serif font-black text-center text-[#1e3a8a] mb-12 reveal"
+            >
+                <span class="text-gradient-navy">Lo que incluye tu estadía</span
+                >
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {
+                    services.map((service, index) => (
+                        <div
+                            class={`bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 reveal reveal-delay-${(index + 1) * 100}`}
+                        >
+                            <div class="w-14 h-14 bg-[#1e3a8a]/10 rounded-xl flex items-center justify-center mb-6">
+                                <service.icon className="w-8 h-8 text-[#1e3a8a]" />
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3">
+                                {service.title}
+                            </h3>
+                            <p class="text-gray-600 leading-relaxed">
+                                {service.description}
+                            </p>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+
+        <!-- Entorno -->
+        <div class="reveal reveal-delay-200">
+            <div class="text-center mb-12">
+                <h2
+                    class="text-4xl md:text-5xl font-serif font-black text-[#1e3a8a] mb-4"
+                >
+                    <span class="text-gradient-navy">Nuestro Entorno</span>
+                </h2>
+                <p class="text-gray-600 max-w-2xl mx-auto text-lg">
+                    Disfruta de la magia de Valparaíso desde una ubicación
+                    privilegiada.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {
+                    surroundings.map((item, index) => (
+                        <div
+                            class={`group relative overflow-hidden rounded-2xl aspect-[3/4] shadow-lg reveal reveal-delay-${(index + 1) * 100}`}
+                        >
+                            <img
+                                src={item.image}
+                                alt={item.text}
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                            />
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-6">
+                                <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                    <div class="flex items-center text-[#fb923c] mb-2">
+                                        <item.icon className="w-5 h-5 mr-2" />
+                                        <span class="font-medium text-sm tracking-uppercase">
+                                            Valparaíso
+                                        </span>
+                                    </div>
+                                    <h3 class="text-white font-bold text-xl leading-tight">
+                                        {item.text}
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+    </div>
+</section>
