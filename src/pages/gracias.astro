@@ -1,0 +1,75 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import { CheckCircle } from "lucide-react";
+---
+
+<Layout title="¡Gracias! | Casa Hospedaje Cerro Los Placeres">
+    <Navbar />
+
+    <main
+        class="min-h-screen flex items-center justify-center bg-gray-50 pt-20"
+    >
+        <div
+            class="max-w-md w-full mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center"
+        >
+            <div
+                class="bg-white rounded-2xl shadow-xl p-8 transform transition-all hover:scale-105 duration-300"
+            >
+                <div class="flex justify-center mb-6">
+                    <div
+                        class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center animate-bounce-slow"
+                    >
+                        <CheckCircle className="w-10 h-10 text-green-600" />
+                    </div>
+                </div>
+
+                <h1 class="text-3xl font-serif font-bold text-[#1e3a8a] mb-4">
+                    ¡Mensaje Recibido!
+                </h1>
+
+                <p class="text-gray-600 mb-8 text-lg">
+                    Gracias por contactarnos. Hemos recibido tu consulta y nos
+                    pondremos en contacto contigo a la brevedad posible.
+                </p>
+
+                <a
+                    href="/"
+                    class="inline-block w-full bg-[#d97706] hover:bg-[#b45309] text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                >
+                    Volver al Inicio
+                </a>
+            </div>
+
+            <div class="mt-8 text-sm text-gray-500">
+                <p>¿Necesitas respuesta inmediata?</p>
+                <a
+                    href="https://wa.me/56998518939"
+                    class="text-[#1e3a8a] font-medium hover:underline flex items-center justify-center gap-1 mt-2"
+                >
+                    Escríbenos por WhatsApp
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <Footer />
+</Layout>
+
+<style>
+    .animate-bounce-slow {
+        animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+        0%,
+        100% {
+            transform: translateY(-5%);
+            animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+        }
+        50% {
+            transform: translateY(0);
+            animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+        }
+    }
+</style>
