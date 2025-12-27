@@ -79,7 +79,7 @@
                         "/imagenes/hospedaje-valparaiso-37.jpeg",
                         "/imagenes/interior.jpeg",
                     ].map((src, index) => (
-                        <div class="relative flex-shrink-0 w-[85%] md:w-[60%] snap-center group">
+                        <div class="relative flex-shrink-0 w-[85%] md:w-[calc(33.333%-16px)] snap-center group">
                             <div class="relative aspect-[16/10] overflow-hidden rounded-2xl shadow-xl">
                                 <img
                                     src={src}
@@ -104,7 +104,14 @@
             const nextBtn = document.getElementById("gallery-next");
 
             if (container && prevBtn && nextBtn) {
-                const scrollAmount = () => container.offsetWidth * 0.6; // Scroll one slide width
+                // Scroll one full slide width including gap
+                const scrollAmount = () => {
+                    const firstItem =
+                        container.firstElementChild as HTMLElement;
+                    return firstItem
+                        ? firstItem.offsetWidth + 24
+                        : container.offsetWidth / 3; // 24 is gap-6
+                };
 
                 nextBtn.addEventListener("click", () => {
                     container.scrollBy({
@@ -123,3 +130,4 @@
         </script>
     </div>
 </section>
+```
