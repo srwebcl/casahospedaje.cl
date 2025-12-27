@@ -28,6 +28,21 @@ const {
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 
+		<!-- Google tag (gtag.js) -->
+		<script
+			async
+			src="https://www.googletagmanager.com/gtag/js?id=AW-17835958873"
+			is:inline></script>
+		<script is:inline>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() {
+				dataLayer.push(arguments);
+			}
+			gtag("js", new Date());
+
+			gtag("config", "AW-17835958873");
+		</script>
+
 		<!-- Meta Pixel Code -->
 		<script is:inline>
 			!(function (f, b, e, v, n, t, s) {
