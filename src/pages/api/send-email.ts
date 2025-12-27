@@ -4,13 +4,14 @@ import { Resend } from "resend";
 // const resend = new Resend(import.meta.env.RESEND_API_KEY); // Moved inside handler
 
 export const POST: APIRoute = async ({ request }) => {
-    const data = await request.formData();
-    const name = data.get("name");
-    const email = data.get("email");
-    const subject = data.get("subject");
-    const message = data.get("message");
+    const formData = await request.formData();
+    const name = formData.get("name") as string;
+    const email = formData.get("email") as string;
+    const phone = formData.get("phone") as string;
+    const subject = formData.get("subject") as string;
+    const message = formData.get("message") as string;
 
-    if (!name || !email || !subject || !message) {
+    if (!name || !email || !phone || !subject || !message) {
         return new Response(
             JSON.stringify({
                 message: "Faltan campos requeridos",
@@ -22,53 +23,74 @@ export const POST: APIRoute = async ({ request }) => {
     try {
         const resend = new Resend(import.meta.env.RESEND_API_KEY);
 
-        const sendRes = await resend.emails.send({
-            from: "Casa Hospedaje Web <noreply@casahospedaje.cl>", // Assumes domain is verified. If not, fallback to onboarding@resend.dev locally
-            to: ["contacto@casahospedaje.cl"],
-            replyTo: email as string,
-            subject: `Nuevo Lead Web: ${subject}`,
+        const { data, error } = await resend.emails.send({
+            from: "Casa Hospedaje <noreply@casahospedaje.cl>",
+            to: ["contacto@casahospedaje.cl", "gonzalez.sergomar@gmail.com", "giorroel@gmail.com"],
+            replyTo: email,
+            subject: `Nuevo Mensaje: ${subject}`,
             html: `
         <!DOCTYPE html>
         <html>
         <head>
             <meta charset="utf-8">
             <style>
-                body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; }
-                .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-                .header { background-color: #1e3a8a; padding: 20px; border-radius: 8px 8px 0 0; text-align: center; }
-                .header h2 { color: white; margin: 0; }
-                .content { background-color: #f9fafb; padding: 30px; border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 8px 8px; }
-                .field { margin-bottom: 20px; }
-                .label { font-weight: bold; color: #4b5563; font-size: 0.875rem; text-transform: uppercase; margin-bottom: 5px; display: block; }
-                .value { background: white; padding: 12px; border-radius: 6px; border: 1px solid #e5e7eb; }
-                .footer { text-align: center; margin-top: 30px; font-size: 0.75rem; color: #9ca3af; }
+                body { margin: 0; padding: 0; font-family: 'Times New Roman', serif; background-color: #f9fafb; color: #1e293b; }
+                .container { max-width: 600px; margin: 40px auto; background-color: #ffffff; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); border-radius: 2px; border-top: 4px solid #d97706; overflow: hidden; }
+                .header { padding: 40px 20px; text-align: center; background-color: #1e3a8a; color: white; }
+                .header h1 { margin: 0; font-size: 24px; font-weight: normal; letter-spacing: 1px; text-transform: uppercase; }
+                .header p { margin: 10px 0 0; font-size: 14px; opacity: 0.8; font-family: sans-serif; }
+                .content { padding: 40px 30px; }
+                .intro { text-align: center; margin-bottom: 30px; font-size: 18px; color: #334155; font-style: italic; }
+                .data-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+                .field-group { border-bottom: 1px solid #e2e8f0; padding-bottom: 15px; margin-bottom: 15px; }
+                .field-group:last-child { border-bottom: none; }
+                .label { display: block; font-size: 12px; color: #64748b; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; font-family: sans-serif; }
+                .value { font-size: 16px; color: #0f172a; line-height: 1.5; }
+                .message-box { background-color: #f8fafc; padding: 20px; border-left: 3px solid #d97706; margin-top: 20px; font-style: italic; }
+                .footer { background-color: #f1f5f9; padding: 20px; text-align: center; font-size: 12px; color: #64748b; font-family: sans-serif; }
+                a { color: #d97706; text-decoration: none; }
             </style>
         </head>
         <body>
             <div class="container">
                 <div class="header">
-                    <h2>Nuevo Cliente Potencial</h2>
+                    <h1>Casa Hospedaje</h1>
+                    <p>Cerro Los Placeres, Valparaíso</p>
                 </div>
                 <div class="content">
-                    <div class="field">
-                        <span class="label">Nombre</span>
-                        <div class="value">${name}</div>
+                    <div class="intro">
+                        Ha llegado una nueva solicitud de reserva o consulta.
                     </div>
-                    <div class="field">
-                        <span class="label">Email</span>
-                        <div class="value"><a href="mailto:${email}" style="color: #1e3a8a; text-decoration: none;">${email}</a></div>
-                    </div>
-                    <div class="field">
-                        <span class="label">Asunto</span>
-                        <div class="value">${subject}</div>
-                    </div>
-                    <div class="field">
-                        <span class="label">Mensaje</span>
-                        <div class="value" style="white-space: pre-wrap;">${message}</div>
+                    
+                    <div class="data-grid">
+                        <div class="field-group">
+                            <span class="label">Huésped / Interesado</span>
+                            <div class="value">${name}</div>
+                        </div>
+                        
+                        <div class="field-group">
+                            <span class="label">Contacto</span>
+                            <div class="value">
+                                <a href="mailto:${email}">${email}</a><br>
+                                <a href="tel:${phone}">${phone}</a>
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <span class="label">Asunto</span>
+                            <div class="value">${subject}</div>
+                        </div>
+                        
+                        <div class="field-group">
+                            <span class="label">Mensaje del Huésped</span>
+                            <div class="message-box">
+                                "${message}"
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="footer">
-                    <p>Este mensaje fue enviado desde el formulario de contacto de casahospedaje.cl</p>
+                    <p>Recibido desde el sitio web oficial casahospedaje.cl</p>
                 </div>
             </div>
         </body>
@@ -76,11 +98,11 @@ export const POST: APIRoute = async ({ request }) => {
       `,
         });
 
-        if (sendRes.error) {
-            console.error("Resend Error:", sendRes.error);
+        if (error) {
+            console.error("Resend Error:", error);
             return new Response(
                 JSON.stringify({
-                    message: "Error al enviar el correo: " + sendRes.error.message,
+                    message: "Error al enviar el correo: " + error.message,
                 }),
                 { status: 500 }
             );

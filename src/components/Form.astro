@@ -2,23 +2,45 @@
 
 ---
 
-<form class="space-y-6" id="contact-form">
-    <div>
-        <label for="name" class="block text-sm font-medium text-gray-700"
-            >Nombre</label
-        >
-        <input
-            type="text"
-            name="name"
-            id="name"
-            required
-            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1e3a8a] focus:ring-[#1e3a8a] py-3 px-4 bg-gray-50"
-            placeholder="Tu nombre completo"
-        />
+<form class="space-y-8" id="contact-form">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="group">
+            <label
+                for="name"
+                class="block text-sm font-medium text-gray-500 mb-2 transition-colors group-focus-within:text-[#d97706]"
+                >Nombre Completo</label
+            >
+            <input
+                type="text"
+                name="name"
+                id="name"
+                required
+                class="block w-full border-0 border-b-2 border-gray-200 bg-transparent py-2.5 px-0 text-gray-900 placeholder:text-gray-300 focus:border-[#d97706] focus:ring-0 transition-colors duration-300 sm:text-base"
+                placeholder="Ej: Juan Pérez"
+            />
+        </div>
+
+        <div class="group">
+            <label
+                for="phone"
+                class="block text-sm font-medium text-gray-500 mb-2 transition-colors group-focus-within:text-[#d97706]"
+                >Teléfono / WhatsApp</label
+            >
+            <input
+                type="tel"
+                name="phone"
+                id="phone"
+                required
+                class="block w-full border-0 border-b-2 border-gray-200 bg-transparent py-2.5 px-0 text-gray-900 placeholder:text-gray-300 focus:border-[#d97706] focus:ring-0 transition-colors duration-300 sm:text-base"
+                placeholder="+56 9 1234 5678"
+            />
+        </div>
     </div>
 
-    <div>
-        <label for="email" class="block text-sm font-medium text-gray-700"
+    <div class="group">
+        <label
+            for="email"
+            class="block text-sm font-medium text-gray-500 mb-2 transition-colors group-focus-within:text-[#d97706]"
             >Correo Electrónico</label
         >
         <input
@@ -26,27 +48,35 @@
             name="email"
             id="email"
             required
-            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1e3a8a] focus:ring-[#1e3a8a] py-3 px-4 bg-gray-50"
-            placeholder="tu@correo.com"
+            class="block w-full border-0 border-b-2 border-gray-200 bg-transparent py-2.5 px-0 text-gray-900 placeholder:text-gray-300 focus:border-[#d97706] focus:ring-0 transition-colors duration-300 sm:text-base"
+            placeholder="nombre@ejemplo.com"
         />
     </div>
 
-    <div>
-        <label for="subject" class="block text-sm font-medium text-gray-700"
+    <div class="group">
+        <label
+            for="subject"
+            class="block text-sm font-medium text-gray-500 mb-2 transition-colors group-focus-within:text-[#d97706]"
             >Asunto</label
         >
-        <input
-            type="text"
+        <select
             name="subject"
             id="subject"
             required
-            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1e3a8a] focus:ring-[#1e3a8a] py-3 px-4 bg-gray-50"
-            placeholder="Consulta por habitación..."
-        />
+            class="block w-full border-0 border-b-2 border-gray-200 bg-transparent py-2.5 px-0 text-gray-900 focus:border-[#d97706] focus:ring-0 transition-colors duration-300 sm:text-base"
+        >
+            <option value="" disabled selected>Selecciona una opción</option>
+            <option value="Reserva de Habitación">Reserva de Habitación</option>
+            <option value="Consulta General">Consulta General</option>
+            <option value="Evento Especial">Evento Especial</option>
+            <option value="Otro">Otro</option>
+        </select>
     </div>
 
-    <div>
-        <label for="message" class="block text-sm font-medium text-gray-700"
+    <div class="group">
+        <label
+            for="message"
+            class="block text-sm font-medium text-gray-500 mb-2 transition-colors group-focus-within:text-[#d97706]"
             >Mensaje</label
         >
         <textarea
@@ -54,64 +84,68 @@
             id="message"
             rows="4"
             required
-            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#1e3a8a] focus:ring-[#1e3a8a] py-3 px-4 bg-gray-50"
-            placeholder="Escribe tu mensaje aquí..."></textarea>
+            class="block w-full border-0 border-b-2 border-gray-200 bg-transparent py-2.5 px-0 text-gray-900 placeholder:text-gray-300 focus:border-[#d97706] focus:ring-0 transition-colors duration-300 sm:text-base resize-none"
+            placeholder="Cuéntanos más sobre tu viaje..."></textarea>
     </div>
 
-    <div>
+    <div class="pt-4">
         <button
             type="submit"
-            class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#1e3a8a] hover:bg-[#1e3a8a]/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1e3a8a] transition-colors duration-300"
+            class="w-full md:w-auto px-8 py-4 bg-[#1e3a8a] text-white font-medium tracking-wide hover:bg-[#d97706] transition-all duration-300 rounded-none shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
         >
-            Enviar Mensaje
+            Enviar Solicitud
         </button>
     </div>
 
     <div id="form-status" class="hidden text-sm font-medium text-center"></div>
-</form>
 
-<script>
-    const form = document.getElementById("contact-form") as HTMLFormElement;
-    const statusDiv = document.getElementById("form-status") as HTMLDivElement;
+    <script>
+        const form = document.getElementById("contact-form") as HTMLFormElement;
+        const statusDiv = document.getElementById(
+            "form-status",
+        ) as HTMLDivElement;
 
-    form?.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const formData = new FormData(form);
+        form?.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const formData = new FormData(form);
 
-        // Disable button
-        const submitBtn = form.querySelector(
-            'button[type="submit"]',
-        ) as HTMLButtonElement;
-        const originalText = submitBtn.innerText;
-        submitBtn.disabled = true;
-        submitBtn.innerText = "Enviando...";
-        statusDiv.classList.add("hidden");
+            // Disable button
+            const submitBtn = form.querySelector(
+                'button[type="submit"]',
+            ) as HTMLButtonElement;
+            const originalText = submitBtn.innerText;
+            submitBtn.disabled = true;
+            submitBtn.innerText = "Enviando...";
+            statusDiv.classList.add("hidden");
 
-        try {
-            const response = await fetch("/api/send-email", {
-                method: "POST",
-                body: formData,
-            });
+            try {
+                const response = await fetch("/api/send-email", {
+                    method: "POST",
+                    body: formData,
+                });
 
-            const data = await response.json();
+                const data = await response.json();
 
-            if (response.ok) {
-                // Redirect to thank you page
-                window.location.href = "/gracias";
-            } else {
-                throw new Error(data.message || "Error al enviar el mensaje");
+                if (response.ok) {
+                    // Redirect to thank you page
+                    window.location.href = "/gracias";
+                } else {
+                    throw new Error(
+                        data.message || "Error al enviar el mensaje",
+                    );
+                }
+            } catch (error: any) {
+                console.error(error);
+                statusDiv.innerText =
+                    "Hubo un error al enviar el mensaje. " +
+                    (error.message || "Por favor intenta nuevamente.");
+                statusDiv.classList.remove("text-green-600", "hidden");
+                statusDiv.classList.add("text-red-600");
+
+                submitBtn.disabled = false;
+                submitBtn.innerText = originalText;
+                statusDiv.classList.remove("hidden");
             }
-        } catch (error: any) {
-            console.error(error);
-            statusDiv.innerText =
-                "Hubo un error al enviar el mensaje. " +
-                (error.message || "Por favor intenta nuevamente.");
-            statusDiv.classList.remove("text-green-600", "hidden");
-            statusDiv.classList.add("text-red-600");
-
-            submitBtn.disabled = false;
-            submitBtn.innerText = originalText;
-            statusDiv.classList.remove("hidden");
-        }
-    });
-</script>
+        });
+    </script>
+</form>

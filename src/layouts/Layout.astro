@@ -42,6 +42,22 @@ const {
 
 			gtag("config", "AW-17835958873");
 		</script>
+		<script is:inline>
+			function gtag_report_conversion(url, send_to) {
+				var callback = function () {
+					if (typeof url != "undefined") {
+						window.location = url;
+					}
+				};
+				gtag("event", "conversion", {
+					send_to: send_to,
+					value: 1.0,
+					currency: "CLP",
+					event_callback: callback,
+				});
+				return false;
+			}
+		</script>
 
 		<!-- Meta Pixel Code -->
 		<script is:inline>
