@@ -1,7 +1,7 @@
 import type { APIRoute } from "astro";
 import { Resend } from "resend";
 
-const resend = new Resend(import.meta.env.RESEND_API_KEY);
+// const resend = new Resend(import.meta.env.RESEND_API_KEY); // Moved inside handler
 
 export const POST: APIRoute = async ({ request }) => {
     const data = await request.formData();
@@ -20,6 +20,8 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     try {
+        const resend = new Resend(import.meta.env.RESEND_API_KEY);
+
         const sendRes = await resend.emails.send({
             from: "Casa Hospedaje Web <noreply@casahospedaje.cl>", // Assumes domain is verified. If not, fallback to onboarding@resend.dev locally
             to: ["contacto@casahospedaje.cl"],
