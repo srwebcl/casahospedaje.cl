@@ -1,5 +1,5 @@
 ---
-import { Menu, X } from "lucide-react";
+import { Menu, X, Phone } from "lucide-react";
 
 const links = [
     { name: "Inicio", href: "#" },
@@ -65,6 +65,14 @@ const links = [
                     ))
                 }
                 <a
+                    href="tel:+56998518939"
+                    onclick="gtag('event', 'conversion', {'send_to': 'AW-17835958873/fB4gCK_PmtgbENnE7LhC'});"
+                    class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-[#1e3a8a] hover:bg-[#1e3a8a] hover:text-white transition-all duration-300 shadow-sm hover:shadow-md"
+                    aria-label="Llamar"
+                >
+                    <Phone className="w-5 h-5" />
+                </a>
+                <a
                     href="#contacto"
                     class="bg-[#1e3a8a] hover:bg-[#1e3a8a]/90 text-white px-6 py-2.5 rounded-full font-medium transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5 text-sm"
                 >
@@ -103,6 +111,14 @@ const links = [
                     </a>
                 ))
             }
+            <a
+                href="tel:+56998518939"
+                onclick="gtag('event', 'conversion', {'send_to': 'AW-17835958873/fB4gCK_PmtgbENnE7LhC'});"
+                class="block px-3 py-3 text-base font-medium text-gray-600 hover:text-[#d97706] hover:bg-gray-50 rounded-lg transition-colors flex items-center gap-2"
+            >
+                <Phone className="w-5 h-5" />
+                Llamar
+            </a>
             <div class="pt-4">
                 <a
                     href="#contacto"

@@ -1,5 +1,5 @@
 ---
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin, MessageCircle } from "lucide-react";
 import Form from "./Form.astro";
 ---
 
@@ -86,10 +86,10 @@ import Form from "./Form.astro";
                 </p>
 
                 <div class="space-y-8 reveal reveal-delay-300">
+                    <!-- Call Button -->
                     <a
-                        href="https://wa.me/56998518939"
-                        target="_blank"
-                        onclick="return gtag_report_conversion(this.href, 'AW-17835958873/fB4gCK_PmtgbENnE7LhC');"
+                        href="tel:+56998518939"
+                        onclick="gtag('event', 'conversion', {'send_to': 'AW-17835958873/fB4gCK_PmtgbENnE7LhC'});"
                         class="flex items-center group p-4 rounded-xl hover:bg-white/5 transition-all duration-300 border border-transparent hover:border-white/10"
                     >
                         <div
@@ -101,7 +101,7 @@ import Form from "./Form.astro";
                             <p
                                 class="text-xs text-gray-400 uppercase tracking-wider font-medium mb-1"
                             >
-                                WhatsApp & Teléfono
+                                Llámanos
                             </p>
                             <p
                                 class="text-xl font-medium text-white group-hover:text-[#fb923c] transition-colors"
